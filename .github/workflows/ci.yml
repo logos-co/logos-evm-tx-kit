@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      # Plain JavaScript, so CodeQL can read it: an app whose only JS is this file fails otherwise.
+      - run: node --check qml/fees.js
       - run: node doctests/fees_table.mjs
 
   probes:
