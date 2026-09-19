@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// qml/fees.js as a table: the same text the components import, its `.pragma` line stripped.
+// qml/fees.js as a table: the same text the components import.
 //
 // Run: node doctests/fees_table.mjs
 
@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const src = readFileSync(join(here, "..", "qml", "fees.js"), "utf8").replace(/^\s*\.pragma\s+library\s*$/m, "");
+const src = readFileSync(join(here, "..", "qml", "fees.js"), "utf8");
 const names = [...src.matchAll(/^function\s+(\w+)\s*\(/gm)].map((m) => m[1]);
 const F = new Function(`${src}\nreturn { ${names.join(", ")} };`)();
 
